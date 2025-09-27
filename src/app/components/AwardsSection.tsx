@@ -1,11 +1,6 @@
 "use client";
 import Image from "next/image";
 
-// const awards = Array.from({ length: 7 }, (_, i) => ({
-//   id: i + 1,
-//   src: "https://cdn-ilccjcp.nitrocdn.com/kUqSgfkOAatBTySULySRafklOQMXBHwf/assets/images/optimized/rev-5026f65/nascenia.com/wp-content/uploads/2024/08/1-1-200x200.png",
-// }));
-
 const awards = [
   {
     id: 1,

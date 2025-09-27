@@ -8,7 +8,7 @@
 //   FaShieldAlt,
 //   FaArrowRight,
 // } from "react-icons/fa";
-// import { motion } from "framer-motion";
+// import { motion, Variants } from "framer-motion";
 
 // const services = [
 //   {
@@ -50,7 +50,8 @@
 // ];
 
 // const EnterpriseSection = () => {
-//   const fadeLeft = {
+//   // ✅ Type-safe variants
+//   const fadeLeft: Variants = {
 //     hidden: { opacity: 0, x: -50 },
 //     show: {
 //       opacity: 1,
@@ -59,7 +60,7 @@
 //     },
 //   };
 
-//   const fadeRight = {
+//   const fadeRight: Variants = {
 //     hidden: { opacity: 0, x: 50 },
 //     show: {
 //       opacity: 1,
@@ -68,7 +69,7 @@
 //     },
 //   };
 
-//   const fadeUp = {
+//   const fadeUp: Variants = {
 //     hidden: { opacity: 0, y: 30 },
 //     show: {
 //       opacity: 1,
@@ -77,11 +78,9 @@
 //     },
 //   };
 
-//   const container = {
+//   const container: Variants = {
 //     hidden: {},
-//     show: {
-//       transition: { staggerChildren: 0.15 },
-//     },
+//     show: { transition: { staggerChildren: 0.15 } },
 //   };
 
 //   return (
@@ -144,7 +143,6 @@ import {
   FaShieldAlt,
   FaArrowRight,
 } from "react-icons/fa";
-import { motion, Variants } from "framer-motion";
 
 const services = [
   {
@@ -186,72 +184,24 @@ const services = [
 ];
 
 const EnterpriseSection = () => {
-  // ✅ Type-safe variants
-  const fadeLeft: Variants = {
-    hidden: { opacity: 0, x: -50 },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
-  const fadeRight: Variants = {
-    hidden: { opacity: 0, x: 50 },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
-  const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.15 } },
-  };
-
   return (
     <section className="py-20 bg-[#F6F7F8]">
       {/* Header */}
-      <motion.div
-        className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 text-left"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <motion.h2
-          variants={fadeLeft}
-          className="text-3xl font-bold text-gray-900"
-        >
+      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 text-left">
+        <h2 className="text-3xl font-bold text-gray-900">
           Custom Enterprise <br /> Software Development Services
-        </motion.h2>
-        <motion.p variants={fadeRight} className="text-gray-600 text-lg">
+        </h2>
+        <p className="text-gray-600 text-lg">
           We prioritize cultivating lasting business partnerships as your
           trusted software development partner.
-        </motion.p>
-      </motion.div>
+        </p>
+      </div>
 
       {/* Cards */}
-      <motion.div
-        className="max-w-6xl mx-auto px-6 mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-      >
+      <div className="max-w-6xl mx-auto px-6 mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service) => (
-          <motion.div
+          <div
             key={service.id}
-            variants={fadeUp}
             className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 text-left transition transform hover:-translate-y-2 hover:shadow-lg"
           >
             {service.icon}
@@ -260,9 +210,9 @@ const EnterpriseSection = () => {
             </h3>
             <p className="mt-2 text-gray-600">{service.desc}</p>
             <FaArrowRight size={30} />
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };
