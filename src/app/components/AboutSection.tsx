@@ -2,6 +2,7 @@
 // import Image from "next/image";
 // import { FaSmile, FaLock, FaHandshake } from "react-icons/fa";
 // import { MdPolicy } from "react-icons/md";
+// import { motion } from "framer-motion";
 
 // const values = [
 //   {
@@ -27,13 +28,42 @@
 // ];
 
 // const AboutSection = () => {
+//   const container = {
+//     hidden: {},
+//     show: {
+//       transition: {
+//         staggerChildren: 0.2,
+//       },
+//     },
+//   };
+
+//   const fadeLeft = {
+//     hidden: { opacity: 0, x: -100 },
+//     show: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } },
+//   };
+
+//   const fadeRight = {
+//     hidden: { opacity: 0, x: 100 },
+//     show: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } },
+//   };
+
+//   const fadeUp = {
+//     hidden: { opacity: 0, y: 50 },
+//     show: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+//   };
+
 //   return (
 //     <>
 //       {/* About Us (Text + Image) */}
 //       <section className="py-20 bg-gray-50">
-//         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+//         <motion.div
+//           className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center"
+//           initial="hidden"
+//           whileInView="show"
+//           viewport={{ once: true, amount: 0.3 }}
+//         >
 //           {/* Left Side - Text */}
-//           <div>
+//           <motion.div variants={fadeLeft}>
 //             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
 //               About Us
 //             </h2>
@@ -54,34 +84,46 @@
 //               pride in transforming ideas into robust, scalable solutions that
 //               drive growth and success.
 //             </p>
-//           </div>
+//           </motion.div>
 
 //           {/* Right Side - Image */}
-//           <div className="flex justify-center md:justify-end">
+//           <motion.div
+//             variants={fadeRight}
+//             className="flex justify-center md:justify-end"
+//           >
 //             <Image
 //               src="https://cdn-ilccjcp.nitrocdn.com/kUqSgfkOAatBTySULySRafklOQMXBHwf/assets/images/optimized/rev-5026f65/nascenia.com/wp-content/uploads/2024/07/7-800x531-1.jpg"
 //               alt="About Nascenia"
 //               width={600}
 //               height={400}
-//               className=""
 //             />
-//           </div>
-//         </div>
+//           </motion.div>
+//         </motion.div>
 //       </section>
 
 //       {/* Values Section */}
-//       <section className="bg-gray-50">
-//         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+//       <section className="bg-gray-50 py-10">
+//         <motion.div
+//           className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10"
+//           variants={container}
+//           initial="hidden"
+//           whileInView="show"
+//           viewport={{ once: true, amount: 0.3 }}
+//         >
 //           {values.map((item, idx) => (
-//             <div key={idx} className="flex items-start gap-4 p-6">
+//             <motion.div
+//               key={idx}
+//               variants={fadeUp}
+//               className="flex items-start gap-4 p-6  rounded-lg"
+//             >
 //               <div className="p-3 border-2 border-orange-500 ">{item.icon}</div>
 //               <div>
 //                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
 //                 <p className="text-gray-600">{item.desc}</p>
 //               </div>
-//             </div>
+//             </motion.div>
 //           ))}
-//         </div>
+//         </motion.div>
 //       </section>
 //     </>
 //   );
@@ -93,7 +135,7 @@
 import Image from "next/image";
 import { FaSmile, FaLock, FaHandshake } from "react-icons/fa";
 import { MdPolicy } from "react-icons/md";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const values = [
   {
@@ -118,31 +160,42 @@ const values = [
   },
 ];
 
+// ✅ safe variants with cubic-bezier easing
+const fadeLeft: Variants = {
+  hidden: { opacity: 0, x: -100 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const fadeRight: Variants = {
+  hidden: { opacity: 0, x: 100 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
 const AboutSection = () => {
-  const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const fadeLeft = {
-    hidden: { opacity: 0, x: -100 },
-    show: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } },
-  };
-
-  const fadeRight = {
-    hidden: { opacity: 0, x: 100 },
-    show: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } },
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
-  };
-
   return (
     <>
       {/* About Us (Text + Image) */}
@@ -159,8 +212,7 @@ const AboutSection = () => {
               About Us
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Nascenia is one of the best software companies in Bangladesh. With
-              over{" "}
+              Nascenia is one of the best software companies in Bangladesh. With{" "}
               <span className="font-semibold">14+ years of experience</span>,
               delivering innovative and tailored software solutions. Our journey
               has been driven by a passion for technology and a commitment to
@@ -205,9 +257,9 @@ const AboutSection = () => {
             <motion.div
               key={idx}
               variants={fadeUp}
-              className="flex items-start gap-4 p-6  rounded-lg"
+              className="flex items-start gap-4 p-6 rounded-lg"
             >
-              <div className="p-3 border-2 border-orange-500 ">{item.icon}</div>
+              <div className="p-3 border-2 border-orange-500">{item.icon}</div>
               <div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                 <p className="text-gray-600">{item.desc}</p>
